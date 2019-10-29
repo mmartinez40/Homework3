@@ -1,0 +1,824 @@
+  [1m[35m (46.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePhysicians (20191029030413)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "physicians" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "specialty" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191029030413"]]
+  [1m[35m (0.9ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "development"], ["created_at", "2019-10-29 03:04:32.461841"], ["updated_at", "2019-10-29 03:04:32.461841"]]
+  [1m[35m (0.7ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateAppointments (20191029030518)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE "appointments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "visit" varchar, "physician" varchar, "patient" varchar, "physician_id" integer NOT NULL, "patient_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_9c57b861f7"
+FOREIGN KEY ("physician_id")
+  REFERENCES "physicians" ("id")
+, CONSTRAINT "fk_rails_c63da04ab4"
+FOREIGN KEY ("patient_id")
+  REFERENCES "patients" ("id")
+)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_appointments_on_physician_id" ON "appointments" ("physician_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCREATE  INDEX "index_appointments_on_patient_id" ON "appointments" ("patient_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191029030518"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreatePatients (20191029030545)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "patients" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191029030545"]]
+  [1m[35m (1.3ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateOffices (20191029030625)
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[35mCREATE TABLE "offices" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "street_address" varchar, "zip" integer, "phone" varchar, "physician_id" integer NOT NULL, "created_at" datetime(6) NOT NULL, "updated_at" datetime(6) NOT NULL, CONSTRAINT "fk_rails_53a2948c65"
+FOREIGN KEY ("physician_id")
+  REFERENCES "physicians" ("id")
+)[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCREATE  INDEX "index_offices_on_physician_id" ON "offices" ("physician_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20191029030625"]]
+  [1m[35m (1.1ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2019-10-28 22:14:58 -0500
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/melisandra/.rvm/gems/ruby-2.6.3/gems/railties-6.0.0/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/melisandra/.rvm/gems/ruby-2.6.3/gems/railties-6.0.0/lib/rails/templates/rails/welcome/index.html.erb (Duration: 16.1ms | Allocations: 481)
+Completed 200 OK in 57ms (Views: 31.9ms | ActiveRecord: 0.0ms | Allocations: 5364)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:15:01 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (1.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 23.8ms | Allocations: 1624)
+[Webpacker] Compiling…
+Started GET "/physicians" for ::1 at 2019-10-28 22:15:05 -0500
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 642)
+[Webpacker] Compiling…
+[Webpacker] Compiled all packs in /Users/melisandra/RubymineProjects/CIS4339/Homework3/Homework3/public/packs
+Completed 200 OK in 16144ms (Views: 16107.4ms | ActiveRecord: 1.7ms | Allocations: 1419175)
+
+
+[Webpacker] Compiled all packs in /Users/melisandra/RubymineProjects/CIS4339/Homework3/Homework3/public/packs
+Completed 200 OK in 12341ms (Views: 12336.8ms | ActiveRecord: 0.3ms | Allocations: 14514)
+
+
+Started GET "/physicians/new" for ::1 at 2019-10-28 22:15:20 -0500
+Processing by PhysiciansController#new as HTML
+  Rendering physicians/new.html.erb within layouts/application
+  Rendered physicians/_office_fields.html.erb (Duration: 4.2ms | Allocations: 1408)
+  Rendered physicians/_form.html.erb (Duration: 92.9ms | Allocations: 21925)
+  Rendered physicians/new.html.erb within layouts/application (Duration: 94.7ms | Allocations: 22288)
+Completed 200 OK in 120ms (Views: 105.1ms | ActiveRecord: 1.7ms | Allocations: 33793)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:15:23 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 615)
+Completed 200 OK in 25ms (Views: 22.3ms | ActiveRecord: 0.2ms | Allocations: 8995)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:20:25 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 883)
+Completed 200 OK in 42ms (Views: 39.7ms | ActiveRecord: 0.3ms | Allocations: 12175)
+
+
+Started GET "/physicians/new" for ::1 at 2019-10-28 22:20:28 -0500
+Processing by PhysiciansController#new as HTML
+  Rendering physicians/new.html.erb within layouts/application
+  Rendered physicians/_office_fields.html.erb (Duration: 3.6ms | Allocations: 1076)
+  Rendered physicians/_form.html.erb (Duration: 10.6ms | Allocations: 2727)
+  Rendered physicians/new.html.erb within layouts/application (Duration: 13.0ms | Allocations: 3072)
+Completed 200 OK in 37ms (Views: 34.8ms | ActiveRecord: 0.0ms | Allocations: 11697)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:20:31 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 615)
+Completed 200 OK in 26ms (Views: 23.7ms | ActiveRecord: 0.3ms | Allocations: 9050)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:20:32 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:18
+  Rendered appointments/index.html.erb within layouts/application (Duration: 4.5ms | Allocations: 1303)
+Completed 200 OK in 23ms (Views: 16.7ms | ActiveRecord: 1.0ms | Allocations: 11031)
+
+
+Started GET "/appointments/new" for ::1 at 2019-10-28 22:20:38 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/appointments/_form.html.erb:21
+  [1m[36mPatient Load (0.3ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/appointments/_form.html.erb:26
+  Rendered appointments/_form.html.erb (Duration: 13.1ms | Allocations: 3391)
+  Rendered appointments/new.html.erb within layouts/application (Duration: 14.7ms | Allocations: 3736)
+Completed 200 OK in 79ms (Views: 28.3ms | ActiveRecord: 1.6ms | Allocations: 16926)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:20:40 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:18
+  Rendered appointments/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 615)
+Completed 200 OK in 27ms (Views: 25.6ms | ActiveRecord: 0.2ms | Allocations: 9048)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:21:03 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  Rendered appointments/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 919)
+Completed 200 OK in 21ms (Views: 19.6ms | ActiveRecord: 0.2ms | Allocations: 10357)
+
+
+Started GET "/patients" for ::1 at 2019-10-28 22:21:05 -0500
+Processing by PatientsController#index as HTML
+  Rendering patients/index.html.erb within layouts/application
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/patients/index.html.erb:14
+  Rendered patients/index.html.erb within layouts/application (Duration: 3.2ms | Allocations: 866)
+Completed 200 OK in 25ms (Views: 22.3ms | ActiveRecord: 0.2ms | Allocations: 9907)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:21:06 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  Rendered appointments/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 619)
+Completed 200 OK in 24ms (Views: 22.3ms | ActiveRecord: 0.2ms | Allocations: 9061)
+
+
+Started GET "/appointments/new" for ::1 at 2019-10-28 22:21:07 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/appointments/_form.html.erb:21
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/appointments/_form.html.erb:26
+  Rendered appointments/_form.html.erb (Duration: 10.3ms | Allocations: 2546)
+  Rendered appointments/new.html.erb within layouts/application (Duration: 11.8ms | Allocations: 2888)
+Completed 200 OK in 31ms (Views: 28.2ms | ActiveRecord: 0.4ms | Allocations: 11471)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:21:09 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  Rendered appointments/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 615)
+Completed 200 OK in 19ms (Views: 17.9ms | ActiveRecord: 0.3ms | Allocations: 9048)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:21:11 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.6ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 3.5ms | Allocations: 875)
+Completed 200 OK in 23ms (Views: 18.6ms | ActiveRecord: 0.6ms | Allocations: 9894)
+
+
+Started GET "/physicians/new" for ::1 at 2019-10-28 22:21:12 -0500
+Processing by PhysiciansController#new as HTML
+  Rendering physicians/new.html.erb within layouts/application
+  Rendered physicians/_office_fields.html.erb (Duration: 3.0ms | Allocations: 1076)
+  Rendered physicians/_form.html.erb (Duration: 9.9ms | Allocations: 2728)
+  Rendered physicians/new.html.erb within layouts/application (Duration: 11.3ms | Allocations: 3068)
+Completed 200 OK in 25ms (Views: 22.8ms | ActiveRecord: 0.0ms | Allocations: 11647)
+
+
+Started POST "/physicians" for ::1 at 2019-10-28 22:21:33 -0500
+Processing by PhysiciansController#create as HTML
+  Parameters: {"authenticity_token"=>"Klfzho7uIfVWKCcEKvChA867dzOW9jQn5JbOMp1Veaq/lZxe24qnB+B4kXIr54c+DQc1ucUKwwj1dUCyeZnuIg==", "physician"=>{"name"=>"Dr. Martinez", "specialty"=>"CIS", "offices_attributes"=>{"1572319280723"=>{"street_address"=>"4800 Calhoun Rd.", "zip"=>"77004", "phone"=>"713-744-2255", "_destroy"=>"false"}}}, "commit"=>"Create Physician"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[36mPhysician Create (0.7ms)[0m  [1m[32mINSERT INTO "physicians" ("name", "specialty", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Dr. Martinez"], ["specialty", "CIS"], ["created_at", "2019-10-29 03:21:33.824436"], ["updated_at", "2019-10-29 03:21:33.824436"]]
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[36mOffice Create (0.3ms)[0m  [1m[32mINSERT INTO "offices" ("street_address", "zip", "phone", "physician_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street_address", "4800 Calhoun Rd."], ["zip", 77004], ["phone", "713-744-2255"], ["physician_id", 1], ["created_at", "2019-10-29 03:21:33.830353"], ["updated_at", "2019-10-29 03:21:33.830353"]]
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[35m (3.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/physicians/1
+Completed 302 Found in 18ms (ActiveRecord: 4.2ms | Allocations: 4635)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:21:33 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 1.2ms | Allocations: 277)
+Completed 200 OK in 23ms (Views: 17.4ms | ActiveRecord: 0.3ms | Allocations: 9781)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:21:35 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.7ms | Allocations: 739)
+Completed 200 OK in 17ms (Views: 15.3ms | ActiveRecord: 0.2ms | Allocations: 9179)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:21:38 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 0.7ms | Allocations: 92)
+Completed 200 OK in 25ms (Views: 21.8ms | ActiveRecord: 0.2ms | Allocations: 9029)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:21:39 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.2ms | Allocations: 734)
+Completed 200 OK in 46ms (Views: 44.7ms | ActiveRecord: 0.3ms | Allocations: 9172)
+
+
+Started GET "/physicians/1/edit" for ::1 at 2019-10-28 22:21:40 -0500
+Processing by PhysiciansController#edit as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/edit.html.erb within layouts/application
+  [1m[36mOffice Load (0.3ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/_form.html.erb:25
+  Rendered physicians/_office_fields.html.erb (Duration: 2.4ms | Allocations: 1131)
+  Rendered physicians/_office_fields.html.erb (Duration: 1.8ms | Allocations: 841)
+  Rendered physicians/_form.html.erb (Duration: 11.1ms | Allocations: 4167)
+  Rendered physicians/edit.html.erb within layouts/application (Duration: 13.1ms | Allocations: 4428)
+Completed 200 OK in 32ms (Views: 27.0ms | ActiveRecord: 0.5ms | Allocations: 13505)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:21:42 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.6ms | Allocations: 737)
+Completed 200 OK in 24ms (Views: 20.1ms | ActiveRecord: 0.2ms | Allocations: 9182)
+
+
+Started GET "/patients" for ::1 at 2019-10-28 22:21:43 -0500
+Processing by PatientsController#index as HTML
+  Rendering patients/index.html.erb within layouts/application
+  [1m[36mPatient Load (0.3ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/patients/index.html.erb:14
+  Rendered patients/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 619)
+Completed 200 OK in 24ms (Views: 23.2ms | ActiveRecord: 0.3ms | Allocations: 9060)
+
+
+Started GET "/patients/new" for ::1 at 2019-10-28 22:21:44 -0500
+Processing by PatientsController#new as HTML
+  Rendering patients/new.html.erb within layouts/application
+  Rendered patients/_form.html.erb (Duration: 2.2ms | Allocations: 907)
+  Rendered patients/new.html.erb within layouts/application (Duration: 3.5ms | Allocations: 1246)
+Completed 200 OK in 27ms (Views: 17.6ms | ActiveRecord: 0.7ms | Allocations: 12038)
+
+
+Started POST "/patients" for ::1 at 2019-10-28 22:21:52 -0500
+Processing by PatientsController#create as HTML
+  Parameters: {"authenticity_token"=>"Hr2lJJvczlaUBX1fgnZvGV//jDAVKpSAm/IPdT7AVYD3Ho4nQjA65ImtlQ0IBvNst0Wqr+GDFnVZVAHoorXutQ==", "patient"=>{"name"=>"Harry Potter"}, "commit"=>"Create Patient"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/patients_controller.rb:30:in `block in create'
+  [1m[36mPatient Create (0.8ms)[0m  [1m[32mINSERT INTO "patients" ("name", "created_at", "updated_at") VALUES (?, ?, ?)[0m  [["name", "Harry Potter"], ["created_at", "2019-10-29 03:21:52.563835"], ["updated_at", "2019-10-29 03:21:52.563835"]]
+  ↳ app/controllers/patients_controller.rb:30:in `block in create'
+  [1m[35m (2.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/patients_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/patients/1
+Completed 302 Found in 11ms (ActiveRecord: 3.7ms | Allocations: 2609)
+
+
+Started GET "/patients/1" for ::1 at 2019-10-28 22:21:52 -0500
+Processing by PatientsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPatient Load (0.4ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/patients_controller.rb:67:in `set_patient'
+  Rendering patients/show.html.erb within layouts/application
+  Rendered patients/show.html.erb within layouts/application (Duration: 1.4ms | Allocations: 249)
+Completed 200 OK in 17ms (Views: 13.1ms | ActiveRecord: 0.4ms | Allocations: 9460)
+
+
+Started GET "/patients" for ::1 at 2019-10-28 22:21:53 -0500
+Processing by PatientsController#index as HTML
+  Rendering patients/index.html.erb within layouts/application
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/patients/index.html.erb:14
+  Rendered patients/index.html.erb within layouts/application (Duration: 3.1ms | Allocations: 733)
+Completed 200 OK in 22ms (Views: 20.0ms | ActiveRecord: 0.2ms | Allocations: 9168)
+
+
+Started GET "/patients/1" for ::1 at 2019-10-28 22:21:55 -0500
+Processing by PatientsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/patients_controller.rb:67:in `set_patient'
+  Rendering patients/show.html.erb within layouts/application
+  Rendered patients/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 89)
+Completed 200 OK in 23ms (Views: 17.4ms | ActiveRecord: 0.2ms | Allocations: 9025)
+
+
+Started GET "/patients" for ::1 at 2019-10-28 22:21:56 -0500
+Processing by PatientsController#index as HTML
+  Rendering patients/index.html.erb within layouts/application
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/patients/index.html.erb:14
+  Rendered patients/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 730)
+Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 0.2ms | Allocations: 9165)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:21:57 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  Rendered appointments/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 619)
+Completed 200 OK in 21ms (Views: 19.9ms | ActiveRecord: 0.2ms | Allocations: 9060)
+
+
+Started GET "/appointments/new" for ::1 at 2019-10-28 22:21:59 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/appointments/_form.html.erb:21
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/appointments/_form.html.erb:26
+  Rendered appointments/_form.html.erb (Duration: 7.8ms | Allocations: 2255)
+  Rendered appointments/new.html.erb within layouts/application (Duration: 8.2ms | Allocations: 2340)
+Completed 200 OK in 23ms (Views: 21.4ms | ActiveRecord: 0.6ms | Allocations: 10789)
+
+
+Started POST "/appointments" for ::1 at 2019-10-28 22:22:09 -0500
+Processing by AppointmentsController#create as HTML
+  Parameters: {"authenticity_token"=>"FDL+JFH7l8Hym5BKRZP5zABmQYzlpjBBPAvE8yHzvRFCXChJO6ocXY0ZJ++kE18xKudCRgVCDK7RdFM7hHd20w==", "appointment"=>{"visit"=>"10/28/2019 10:00AM", "physician_id"=>"1", "patient_id"=>"1"}, "commit"=>"Create Appointment"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/appointments_controller.rb:30:in `block in create'
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/appointments_controller.rb:30:in `block in create'
+  [1m[36mPatient Load (0.1ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/appointments_controller.rb:30:in `block in create'
+  [1m[36mAppointment Create (0.8ms)[0m  [1m[32mINSERT INTO "appointments" ("visit", "physician_id", "patient_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["visit", "10/28/2019 10:00AM"], ["physician_id", 1], ["patient_id", 1], ["created_at", "2019-10-29 03:22:09.736514"], ["updated_at", "2019-10-29 03:22:09.736514"]]
+  ↳ app/controllers/appointments_controller.rb:30:in `block in create'
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/appointments_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/appointments/1
+Completed 302 Found in 18ms (ActiveRecord: 2.9ms | Allocations: 6111)
+
+
+Started GET "/appointments/1" for ::1 at 2019-10-28 22:22:09 -0500
+Processing by AppointmentsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAppointment Load (0.3ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments" WHERE "appointments"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/appointments_controller.rb:67:in `set_appointment'
+  Rendering appointments/show.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/show.html.erb:10
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/show.html.erb:15
+  Rendered appointments/show.html.erb within layouts/application (Duration: 5.8ms | Allocations: 1643)
+Completed 200 OK in 22ms (Views: 17.9ms | ActiveRecord: 0.8ms | Allocations: 10856)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:22:11 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:19
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:20
+  Rendered appointments/index.html.erb within layouts/application (Duration: 6.4ms | Allocations: 2093)
+Completed 200 OK in 21ms (Views: 17.9ms | ActiveRecord: 0.5ms | Allocations: 10530)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:22:50 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.4ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:19
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:20
+  Rendered appointments/index.html.erb within layouts/application (Duration: 8.6ms | Allocations: 2370)
+Completed 200 OK in 28ms (Views: 26.0ms | ActiveRecord: 0.8ms | Allocations: 11812)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:23:34 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 3.8ms | Allocations: 999)
+Completed 200 OK in 21ms (Views: 18.9ms | ActiveRecord: 0.2ms | Allocations: 10015)
+
+
+Started GET "/physicians/new" for ::1 at 2019-10-28 22:23:36 -0500
+Processing by PhysiciansController#new as HTML
+  Rendering physicians/new.html.erb within layouts/application
+  Rendered physicians/_office_fields.html.erb (Duration: 1.9ms | Allocations: 1076)
+  Rendered physicians/_form.html.erb (Duration: 7.2ms | Allocations: 2728)
+  Rendered physicians/new.html.erb within layouts/application (Duration: 9.3ms | Allocations: 3074)
+Completed 200 OK in 24ms (Views: 21.4ms | ActiveRecord: 0.0ms | Allocations: 11662)
+
+
+Started POST "/physicians" for ::1 at 2019-10-28 22:24:10 -0500
+Processing by PhysiciansController#create as HTML
+  Parameters: {"authenticity_token"=>"1RdHRs9RWE9jxcHmD/dW4v1wUNxuJIA3Rqqwze1glj1A1SiemjXevdWVd5AO4HDfPswSVj3YdxhXST5NCawBtQ==", "physician"=>{"name"=>"Albus Dumbledore", "specialty"=>"Wizardry", "offices_attributes"=>{"1572319432751"=>{"street_address"=>"Hogwarts", "zip"=>"55000", "phone"=>"555-666-7777", "_destroy"=>"false"}}}, "commit"=>"Create Physician"}
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[36mPhysician Create (1.0ms)[0m  [1m[32mINSERT INTO "physicians" ("name", "specialty", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["name", "Albus Dumbledore"], ["specialty", "Wizardry"], ["created_at", "2019-10-29 03:24:10.060266"], ["updated_at", "2019-10-29 03:24:10.060266"]]
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[36mOffice Create (0.3ms)[0m  [1m[32mINSERT INTO "offices" ("street_address", "zip", "phone", "physician_id", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["street_address", "Hogwarts"], ["zip", 55000], ["phone", "555-666-7777"], ["physician_id", 2], ["created_at", "2019-10-29 03:24:10.065789"], ["updated_at", "2019-10-29 03:24:10.065789"]]
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+  [1m[35m (0.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/physicians_controller.rb:30:in `block in create'
+Redirected to http://localhost:3000/physicians/2
+Completed 302 Found in 14ms (ActiveRecord: 2.2ms | Allocations: 4250)
+
+
+Started GET "/physicians/2" for ::1 at 2019-10-28 22:24:10 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPhysician Load (0.4ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 0.8ms | Allocations: 270)
+Completed 200 OK in 17ms (Views: 13.7ms | ActiveRecord: 0.4ms | Allocations: 9368)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:24:11 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.5ms | Allocations: 858)
+Completed 200 OK in 21ms (Views: 19.1ms | ActiveRecord: 0.2ms | Allocations: 9299)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:24:13 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.2ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:19
+  [1m[36mPatient Load (0.3ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:20
+  Rendered appointments/index.html.erb within layouts/application (Duration: 7.5ms | Allocations: 2094)
+Completed 200 OK in 29ms (Views: 27.0ms | ActiveRecord: 0.7ms | Allocations: 10543)
+
+
+Started GET "/appointments/new" for ::1 at 2019-10-28 22:24:15 -0500
+Processing by AppointmentsController#new as HTML
+  Rendering appointments/new.html.erb within layouts/application
+  [1m[36mPhysician Load (0.4ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/appointments/_form.html.erb:21
+  [1m[36mPatient Load (0.2ms)[0m  [1m[34mSELECT "patients".* FROM "patients"[0m
+  ↳ app/views/appointments/_form.html.erb:26
+  Rendered appointments/_form.html.erb (Duration: 8.9ms | Allocations: 2648)
+  Rendered appointments/new.html.erb within layouts/application (Duration: 10.3ms | Allocations: 2985)
+Completed 200 OK in 27ms (Views: 24.7ms | ActiveRecord: 0.6ms | Allocations: 11563)
+
+
+Started GET "/appointments" for ::1 at 2019-10-28 22:24:19 -0500
+Processing by AppointmentsController#index as HTML
+  Rendering appointments/index.html.erb within layouts/application
+  [1m[36mAppointment Load (0.1ms)[0m  [1m[34mSELECT "appointments".* FROM "appointments"[0m
+  ↳ app/views/appointments/index.html.erb:16
+  [1m[36mPhysician Load (0.1ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:19
+  [1m[36mPatient Load (0.6ms)[0m  [1m[34mSELECT "patients".* FROM "patients" WHERE "patients"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/views/appointments/index.html.erb:20
+  Rendered appointments/index.html.erb within layouts/application (Duration: 6.6ms | Allocations: 2090)
+Completed 200 OK in 27ms (Views: 25.8ms | ActiveRecord: 0.8ms | Allocations: 10528)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:24:25 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.1ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 1.8ms | Allocations: 864)
+Completed 200 OK in 24ms (Views: 22.7ms | ActiveRecord: 0.1ms | Allocations: 9304)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:24:52 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.6ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 3.4ms | Allocations: 855)
+Completed 200 OK in 24ms (Views: 22.7ms | ActiveRecord: 0.6ms | Allocations: 9295)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:24:57 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 0.3ms | Allocations: 92)
+Completed 200 OK in 20ms (Views: 18.3ms | ActiveRecord: 0.2ms | Allocations: 9902)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:29:57 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.4ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 5.2ms | Allocations: 1302)
+Completed 200 OK in 60ms (Views: 56.7ms | ActiveRecord: 0.4ms | Allocations: 11440)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:29:58 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 1.4ms | Allocations: 287)
+Completed 200 OK in 22ms (Views: 17.5ms | ActiveRecord: 0.2ms | Allocations: 9366)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:31:58 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 1.0ms | Allocations: 282)
+Completed 200 OK in 32ms (Views: 29.3ms | ActiveRecord: 0.2ms | Allocations: 10222)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:32:05 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1120)
+Completed 200 OK in 19ms (Views: 16.6ms | ActiveRecord: 0.2ms | Allocations: 9705)
+
+
+Started GET "/physicians/2" for ::1 at 2019-10-28 22:32:09 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 1.4ms | Allocations: 92)
+Completed 200 OK in 19ms (Views: 16.2ms | ActiveRecord: 0.3ms | Allocations: 9026)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:32:10 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (1.5ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 4.7ms | Allocations: 855)
+Completed 200 OK in 17ms (Views: 14.7ms | ActiveRecord: 1.5ms | Allocations: 9294)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:32:11 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.5ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  Rendered physicians/show.html.erb within layouts/application (Duration: 1.4ms | Allocations: 92)
+Completed 200 OK in 27ms (Views: 22.7ms | ActiveRecord: 0.5ms | Allocations: 9028)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:32:12 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 855)
+Completed 200 OK in 24ms (Views: 21.9ms | ActiveRecord: 0.2ms | Allocations: 9292)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:35:40 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.8ms | Allocations: 1120)
+Completed 200 OK in 18ms (Views: 16.2ms | ActiveRecord: 0.2ms | Allocations: 10555)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:35:41 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 4.2ms | Allocations: 1021)
+Completed 200 OK in 29ms (Views: 24.3ms | ActiveRecord: 0.4ms | Allocations: 10103)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:35:42 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 2.1ms | Allocations: 858)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.2ms | Allocations: 9295)
+
+
+Started GET "/physicians/2" for ::1 at 2019-10-28 22:35:43 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 2]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 2.1ms | Allocations: 766)
+Completed 200 OK in 23ms (Views: 18.3ms | ActiveRecord: 0.5ms | Allocations: 9706)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 22:35:44 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 3.0ms | Allocations: 855)
+Completed 200 OK in 20ms (Views: 18.5ms | ActiveRecord: 0.2ms | Allocations: 9292)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:36:42 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.3ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 4.1ms | Allocations: 1019)
+Completed 200 OK in 44ms (Views: 38.0ms | ActiveRecord: 0.6ms | Allocations: 10956)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:37:09 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.1ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.3ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.9ms | Allocations: 1024)
+Completed 200 OK in 25ms (Views: 22.0ms | ActiveRecord: 0.4ms | Allocations: 10964)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:37:53 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.9ms | Allocations: 1059)
+Completed 200 OK in 30ms (Views: 26.4ms | ActiveRecord: 0.5ms | Allocations: 10992)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:39:19 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.1ms | Allocations: 1056)
+Completed 200 OK in 26ms (Views: 21.8ms | ActiveRecord: 0.6ms | Allocations: 10991)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:39:41 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.3ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.2ms | Allocations: 1057)
+Completed 200 OK in 21ms (Views: 18.0ms | ActiveRecord: 0.5ms | Allocations: 10993)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:40:10 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.1ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.6ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.8ms | Allocations: 1055)
+Completed 200 OK in 24ms (Views: 21.0ms | ActiveRecord: 0.7ms | Allocations: 10991)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:41:00 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.1ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.3ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 3.7ms | Allocations: 1054)
+Completed 200 OK in 30ms (Views: 27.7ms | ActiveRecord: 0.4ms | Allocations: 10985)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:42:39 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 2.2ms | Allocations: 774)
+Completed 200 OK in 37ms (Views: 34.6ms | ActiveRecord: 0.4ms | Allocations: 11946)
+
+
+Started GET "/physicians/1" for ::1 at 2019-10-28 22:42:40 -0500
+Processing by PhysiciansController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mPhysician Load (0.2ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians" WHERE "physicians"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/physicians_controller.rb:67:in `set_physician'
+  Rendering physicians/show.html.erb within layouts/application
+  [1m[36mOffice Load (0.2ms)[0m  [1m[34mSELECT "offices".* FROM "offices" WHERE "offices"."physician_id" = ?[0m  [["physician_id", 1]]
+  ↳ app/views/physicians/show.html.erb:22
+  Rendered physicians/show.html.erb within layouts/application (Duration: 2.3ms | Allocations: 772)
+Completed 200 OK in 19ms (Views: 15.7ms | ActiveRecord: 0.4ms | Allocations: 9742)
+
+
+Started GET "/" for ::1 at 2019-10-28 23:06:16 -0500
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT sqlite_version(*)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/melisandra/.rvm/gems/ruby-2.6.3/gems/railties-6.0.0/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/melisandra/.rvm/gems/ruby-2.6.3/gems/railties-6.0.0/lib/rails/templates/rails/welcome/index.html.erb (Duration: 16.0ms | Allocations: 316)
+Completed 200 OK in 34ms (Views: 19.1ms | ActiveRecord: 0.0ms | Allocations: 4213)
+
+
+Started GET "/physicians" for ::1 at 2019-10-28 23:06:20 -0500
+Processing by PhysiciansController#index as HTML
+  Rendering physicians/index.html.erb within layouts/application
+  [1m[36mPhysician Load (0.3ms)[0m  [1m[34mSELECT "physicians".* FROM "physicians"[0m
+  ↳ app/views/physicians/index.html.erb:15
+  Rendered physicians/index.html.erb within layouts/application (Duration: 21.2ms | Allocations: 4658)
+Completed 200 OK in 1492ms (Views: 1481.2ms | ActiveRecord: 1.4ms | Allocations: 1380447)
+
+
